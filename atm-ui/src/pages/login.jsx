@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 
 const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  let navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -19,7 +21,7 @@ const LoginForm = () => {
 
       const result = await response.text();
       if (response.ok) {
-        alert('Login successful: ' + result);
+        navigate('/dashboard');
       } else {
         setError(result);
       }
