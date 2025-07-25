@@ -46,7 +46,7 @@ const LoginForm = () => {
         </Typography>
         <form onSubmit={handleLogin}>
           <TextField
-            label="Email"
+            label="Card Number"
             type="text"
             fullWidth
             required
@@ -55,8 +55,8 @@ const LoginForm = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
-            label="Password"
-            type="password"
+            label="Pin"
+            type="text"
             fullWidth
             required
             margin="normal"

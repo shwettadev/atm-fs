@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
+import {useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  let navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
@@ -20,6 +22,7 @@ const Register = () => {
       const result = await response.text();
       if (response.ok) {
         alert('Login successful: ' + result);
+        navigate('/login'); // Redirect to login page after successful registration
       } else {
         setError(result);
       }

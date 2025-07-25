@@ -1,0 +1,58 @@
+import React, { useEffect, useState } from "react";
+import { Typography, Box, Button } from "@mui/material";
+
+function AccountDetails({ setScreen }) {
+  const [details, setDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:9001/atm/account/details?cardNumber=0000") // 🔁 Replace with actual endpoint
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch account details");
+        return res.json();
+      })
+      .then((data) => {
+        setDetails(data); // ✅ Assuming data = { name, accountNumber, branch, ifsc }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <>
+      <Typography variant="h5" mb={2}>Account Details</Typography>
+
+      {loading ? (
+        <Typography>Loading...</Typography>
+      ) : details ? (
+        <Box sx={{ textAlign: 'left', backgroundColor: '#fff', borderRadius: 1, p: 2, color: '#000', mb: 3 }}>
+          <Typography><strong>Name:</strong> {details.name}</Typography>
+          <Typography><strong>Account Number:</strong> {details.accountNumber}</Typography>
+          <Typography><strong>Branch:</strong> {details.branch}</Typography>
+          <Typography><strong>IFSC Code:</strong> {details.ifsc}</Typography>
+        </Box>
+      ) : (
+        <Typography color="error">Failed to load account details.</Typography>
+      )}
+
+      <Button
+        variant="contained"
+        fullWidth
+        sx={backButtonStyle}
+        onClick={() => setScreen("home")}
+      >
+        Back
+      </Button>
+    </>
+  );
+}
+
+const backButtonStyle = {
+  backgroundColor: "#6c757d",
+  "&:hover": { backgroundColor: "#5a6268" },
+};
+
+export default AccountDetails;

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Dashboard</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .atm-screen {
+          width: 400px;
+          background-color: #333;
+          color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          padding: 20px;
+          text-align: center;
+        }
+        .atm-screen h1 {
+          margin-bottom: 20px;
+        }
+        .atm-screen button {
+          width: 100%;
+          padding: 10px;
+          margin: 10px 0;
+          font-size: 16px;
+          background-color: #007bff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        .atm-screen button:hover {
+          background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="atm-screen">
+    <h1>Welcome to ATM</h1>
+    <p>Select an option:</p>
+    <button onclick="alert('Your balance is $1,000')">Check Balance</button>
+    <button onclick="alert('Withdrawal successful!')">Withdraw Money</button>
+    <button onclick="alert('Transaction history displayed')">View Transaction History</button>
+    <button onclick="alert('You have logged out')">Logout</button>
+</div>
+</body>
+</html>
