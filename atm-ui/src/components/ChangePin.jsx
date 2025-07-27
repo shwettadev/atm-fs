@@ -1,32 +1,30 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
-function Withdraw({ withdrawAmount, setWithdrawAmount, setScreen }) {
+function ChangePin({ setScreen }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
+  const [pin, setPin] = useState("");
 
-  const handleConfirmWithdrawal = () => {
-    const amount = withdrawAmount.toString(); // Ensure string
-    const card = cardNumber.toString();       // Ensure string
-
+  const handlePinChange = () => {
+   
     setLoading(true);
     setMessage("");
 
     // Build URL with parameters
-    const url = `http://localhost:9001/atm/deposit?amount=${encodeURIComponent(amount)}`;
+    const url = `http://localhost:9001/atm/updatePin?pin=${pin}`;
 
     fetch(url, {
       method: "POST",
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Failed to withdraw");
-        setMessage("Withdrawal successful!");
+        if (!res.ok) throw new Error("Failed to change PIN");
+        setMessage("PIN change successfully!");
       })
 
       .catch((err) => {
         console.error(err);
-        setMessage("Failed to complete withdrawal.");
+        setMessage("Failed.");
       })
       .finally(() => {
         setLoading(false);
@@ -36,15 +34,15 @@ function Withdraw({ withdrawAmount, setWithdrawAmount, setScreen }) {
 
   return (
     <>
-      <Typography variant="h5" mb={2}>Deposit Money</Typography>
+      <Typography variant="h5" mb={2}>Change PIN</Typography>
 
       <TextField
         fullWidth
         variant="outlined"
-        placeholder="Enter amount"
+        placeholder="Enter PIN"
         type="number"
-        value={withdrawAmount}
-        onChange={(e) => setWithdrawAmount(e.target.value)}
+        value={pin}
+        onChange={(e) => setPin(e.target.value)}
         sx={{ mb: 3, backgroundColor: '#fff', borderRadius: 1 }}
         InputProps={{ style: { color: '#000' } }}
       />
@@ -59,7 +57,7 @@ function Withdraw({ withdrawAmount, setWithdrawAmount, setScreen }) {
         variant="contained"
         fullWidth
         sx={{ mb: 2, backgroundColor: '#28a745', '&:hover': { backgroundColor: '#218838' } }}
-        onClick={handleConfirmWithdrawal}
+        onClick={handlePinChange}
         disabled={loading}
       >
         {loading ? "Processing..." : "Continue"}
@@ -70,8 +68,6 @@ function Withdraw({ withdrawAmount, setWithdrawAmount, setScreen }) {
         fullWidth
         sx={backButtonStyle}
         onClick={() => {
-          setWithdrawAmount('');
-          setCardNumber('');
           setScreen('home');
         }}
       >
@@ -86,4 +82,4 @@ const backButtonStyle = {
   '&:hover': { backgroundColor: '#5a6268' },
 };
 
-export default Withdraw;
+export default ChangePin;

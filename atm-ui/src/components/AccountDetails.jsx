@@ -6,7 +6,7 @@ function AccountDetails({ setScreen }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:9001/atm/account/details?cardNumber=0000") // 🔁 Replace with actual endpoint
+    fetch("http://localhost:9001/atm/details") // 🔁 Replace with actual endpoint
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch account details");
         return res.json();
@@ -29,8 +29,6 @@ function AccountDetails({ setScreen }) {
         <Typography>Loading...</Typography>
       ) : details ? (
         <Box sx={{ textAlign: 'left', backgroundColor: '#fff', borderRadius: 1, p: 2, color: '#000', mb: 3 }}>
-          <Typography><strong>Name:</strong> {details.name}</Typography>
-          <Typography><strong>Account Number:</strong> {details.accountNumber}</Typography>
           <Typography><strong>Balance:</strong> {details.balance} <pre>Rs</pre></Typography>
         </Box>
       ) : (

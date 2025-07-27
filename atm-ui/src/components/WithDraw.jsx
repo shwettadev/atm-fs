@@ -14,7 +14,7 @@ function Withdraw({ withdrawAmount, setWithdrawAmount, setScreen }) {
     setMessage("");
 
     // Build URL with parameters
-    const url = `http://localhost:9001/atm/account/withdraw?cardNumber=${encodeURIComponent(card)}&amount=${encodeURIComponent(amount)}`;
+    const url = `http://localhost:9001/atm/withdraw?amount=${encodeURIComponent(amount)}`;
 
     fetch(url, {
       method: "POST",
@@ -37,17 +37,6 @@ function Withdraw({ withdrawAmount, setWithdrawAmount, setScreen }) {
   return (
     <>
       <Typography variant="h5" mb={2}>Withdraw Money</Typography>
-
-      <TextField
-        fullWidth
-        variant="outlined"
-        placeholder="Enter Card Number"
-        type="text"
-        value={cardNumber}
-        onChange={(e) => setCardNumber(e.target.value)}
-        sx={{ mb: 3, backgroundColor: '#fff', borderRadius: 1 }}
-        InputProps={{ style: { color: '#000' } }}
-      />
 
       <TextField
         fullWidth

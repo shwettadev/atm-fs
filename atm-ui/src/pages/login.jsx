@@ -3,15 +3,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [pin, setPin] = useState('');
   const [error, setError] = useState('');
   let navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://localhost:9001/atm/login?cardNumber=${email}&pin=${password}`, {
+      const response = await fetch(`http://localhost:9001/atm/insertcard?cardNumber=${cardNumber}&pin=${pin}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -19,8 +19,9 @@ const LoginForm = () => {
       });
 
       const result = await response.text();
+      console.log(result, "result");
       if (response.ok) {
-        navigate('/dashboard');
+        navigate('/dashboard', { state: {carddata:result}});
       } else {
         setError(result);
       }
@@ -41,7 +42,7 @@ const LoginForm = () => {
         }}
       >
         <Typography variant="h4" mb={3} textAlign="center">
-          Login
+          ATM Login
         </Typography>
         <form onSubmit={handleLogin}>
           <TextField
@@ -50,17 +51,17 @@ const LoginForm = () => {
             fullWidth
             required
             margin="normal"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={cardNumber}
+            onChange={(e) => setCardNumber(e.target.value)}
           />
           <TextField
-            label="Pin"
-            type="text"
+            label="PIN"
+            type="password"
             fullWidth
             required
             margin="normal"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={pin}
+            onChange={(e) => setPin(e.target.value)}
           />
           {error && (
             <Typography color="error" mt={2}>
@@ -70,7 +71,6 @@ const LoginForm = () => {
           <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
             Login
           </Button>
-
         </form>
       </Box>
     </Container>
