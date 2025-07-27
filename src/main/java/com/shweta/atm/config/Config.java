@@ -1,7 +1,6 @@
 package com.shweta.atm.config;
 
-
-import com.shweta.atm.model.AccountDetails;
+import com.shweta.atm.models.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,19 +9,24 @@ import java.util.Map;
 
 @Configuration
 public class Config {
-    @Bean
-    public Map<String, String> cards() {
-        Map<String, String> cards = new HashMap<>();
-        // Add some default users
-        cards.put("0000", "0000");
-        cards.put("1111", "1111");
-        return cards;
+
+    @Bean("atm")
+    public ATM buildATM() {
+        return new ATM(buildBank());
     }
-    @Bean
-    public Map<String, AccountDetails> accounts(){
-        Map<String, AccountDetails> accounts = new HashMap<>();
-        accounts.put("0000", new AccountDetails("John Doe", "1234567890", 1000.00));
-        accounts.put("1111", new AccountDetails("Jane Smith", "0987654321", 2000.00));
-        return accounts;
+
+    @Bean("bank")
+    public Bank buildBank() {
+        return new Bank(buildUsers());
+    }
+
+    @Bean("users")
+    public Map<String, User> buildUsers() {
+        Map<String, User> users = new HashMap<>();
+        User shweta = new User("1", "1", new SavingsAccount());
+        User gaurav = new User("2", "2", new CurrentAccount());
+        users.put("1", shweta);
+        users.put("2", gaurav);
+        return users;
     }
 }
