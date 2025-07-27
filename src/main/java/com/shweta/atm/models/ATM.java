@@ -1,7 +1,7 @@
 package com.shweta.atm.models;
 
 public class ATM {
-    private Bank bank;
+    private final Bank bank;
 
     public ATM(Bank bank) {
         this.bank = bank;

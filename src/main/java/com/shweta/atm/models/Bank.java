@@ -3,7 +3,7 @@ package com.shweta.atm.models;
 import java.util.Map;
 
 public class Bank {
-    private Map<String, User> users;
+    private final Map<String, User> users;
 
     public Bank(Map<String, User> users) {
         this.users = users;
