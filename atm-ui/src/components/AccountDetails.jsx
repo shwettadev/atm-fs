@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Typography, Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 function AccountDetails({ setScreen }) {
   const [details, setDetails] = useState(null);
@@ -12,7 +12,7 @@ function AccountDetails({ setScreen }) {
         return res.json();
       })
       .then((data) => {
-        setDetails(data); // ✅ Assuming data = { name, accountNumber, branch, ifsc }
+        setDetails(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -31,8 +31,7 @@ function AccountDetails({ setScreen }) {
         <Box sx={{ textAlign: 'left', backgroundColor: '#fff', borderRadius: 1, p: 2, color: '#000', mb: 3 }}>
           <Typography><strong>Name:</strong> {details.name}</Typography>
           <Typography><strong>Account Number:</strong> {details.accountNumber}</Typography>
-          <Typography><strong>Branch:</strong> {details.branch}</Typography>
-          <Typography><strong>IFSC Code:</strong> {details.ifsc}</Typography>
+          <Typography><strong>Balance:</strong> {details.balance} <pre>Rs</pre></Typography>
         </Box>
       ) : (
         <Typography color="error">Failed to load account details.</Typography>

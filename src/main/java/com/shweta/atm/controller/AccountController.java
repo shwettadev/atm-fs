@@ -1,11 +1,13 @@
 package com.shweta.atm.controller;
 
-
 import com.shweta.atm.model.AccountDetails;
 import com.shweta.atm.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/atm/account")
@@ -29,12 +31,14 @@ public class AccountController {
     }
 
     @GetMapping("/balance")
-    public ResponseEntity<Double> getAccountBalance(@RequestParam String cardNumber) {
-        AccountDetails accountDetails = accountService.getAccountDetails(cardNumber);
-        if (accountDetails != null) {
-            return ResponseEntity.ok(accountDetails.getBalance());
+    public ResponseEntity<Map<String,Double>> getAccountBalance(@RequestParam String cardNumber) {
+        Map<String,Double> resMap = new HashMap<>();
+        Double balance = accountService.getBalance(cardNumber);
+        resMap.put("balance",balance);
+        if (balance != null) {
+            return ResponseEntity.ok(resMap);
         } else {
-            return ResponseEntity.status(404).body(null);
+            return ResponseEntity.status(404).body(resMap);
         }
     }
 
@@ -57,6 +61,4 @@ public class AccountController {
             return ResponseEntity.status(401).body("Deposit failed");
         }
     }
-
-
 }

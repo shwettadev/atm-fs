@@ -34,4 +34,8 @@ public class AccountService {
         accountDetails.setBalance(accountDetails.getBalance() + amount);
         return true;
     }
+
+    public Double getBalance(String cardNumber) {
+        return this.getAccountDetails(cardNumber).getBalance();
+    }
 }

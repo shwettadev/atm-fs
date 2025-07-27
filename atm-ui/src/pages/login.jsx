@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { TextField, Button, Box, Typography, Container } from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [password, setPassword] = useState('');
@@ -11,12 +11,11 @@ const LoginForm = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:9001/login', {
+      const response = await fetch(`http://localhost:9001/atm/login?cardNumber=${email}&pin=${password}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: email, password }),
+        }
       });
 
       const result = await response.text();
@@ -73,19 +72,6 @@ const LoginForm = () => {
           </Button>
 
         </form>
-         <Typography
-                  variant="body2"
-                  sx={{
-                    position: 'relative',
-                    top: 8,
-                    left: 8,
-                    color: 'blue',
-                    cursor: 'pointer',
-                  }}
-                  onClick={() => window.location.href = '/register'}
-                >
-                  Register
-                </Typography>
       </Box>
     </Container>
   );

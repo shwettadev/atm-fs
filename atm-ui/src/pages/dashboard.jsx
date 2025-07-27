@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
 import {
   Box,
-  Typography,
   Button,
-  List,
-  ListItem,
-  ListItemText,
-  Divider
+  Typography
 } from '@mui/material';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Withdraw from '../components/WithDraw';
-import CheckBalance from '../components/CheckBalance';
 import AccountDetails from '../components/AccountDetails';
-import Deposit from '../components/Deposit'
+import CheckBalance from '../components/CheckBalance';
+import Deposit from '../components/Deposit';
+import Withdraw from '../components/WithDraw';
 
 const ATM = () => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Typography, TextField, Button } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 
 function Withdraw({ withdrawAmount, setWithdrawAmount, setScreen }) {
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ function Withdraw({ withdrawAmount, setWithdrawAmount, setScreen }) {
 
   return (
     <>
-      <Typography variant="h5" mb={2}>Withdraw Money</Typography>
+      <Typography variant="h5" mb={2}>Deposit Money</Typography>
 
       <TextField
         fullWidth

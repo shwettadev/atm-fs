@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Typography, TextField, Button } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 
 function Withdraw({ withdrawAmount, setWithdrawAmount, setScreen }) {
   const [loading, setLoading] = useState(false);
